@@ -10,7 +10,9 @@ create table users(
     displayname varchar not null,
     email varchar(50) not null,
     phone_number varchar(10),
-    business_id integer references businesses(id)
+    business_id integer references businesses(id),
+    position varchar,
+    admin_user boolean default false
 );
 
 create table location(
@@ -50,6 +52,7 @@ create table recurring_TO(
     day_of_week DOW not null,
     start_time time,
     end_time time,
+    approved boolean DEFAULT false,
     user_id integer references users(id)
 );
 
@@ -59,6 +62,7 @@ create table one_vaca(
     end_date date,
     start_time time,
     end_time time,
+    approved boolean DEFAULT false,
     user_id integer references users(id)
 );
 
