@@ -4,10 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "db:reset": "dropdb schedule-maker; bash create-db.sh",
+    "db:reset": "dropdb scheduleMaker; bash create-db.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.1.0",
+    "pg-promise": "^9.1.0"
+  }
 }

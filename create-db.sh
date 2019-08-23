@@ -1,4 +1,4 @@
-createdb schedule-maker
+createdb schedulemaker
 
-psql -f schema.sql schedule-maker
-psql -f seed.sql schedule-maker
+psql -f schema.sql schedulemaker
+psql -f seed.sql schedulemaker

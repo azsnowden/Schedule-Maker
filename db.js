@@ -9,7 +9,7 @@ const pgp = require('pg-promise')({
 const db = pgp({
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
-    database: process.env.DB_NAME,
+    database: process.env.DB_NAME
 });
 
 console.log('db: pulled info from .env');
