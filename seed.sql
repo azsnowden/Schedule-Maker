@@ -16,10 +16,10 @@ VALUES
 insert into users
     (displayname, email, phone_number, business_id, position)
 VALUES
-    ('Joe', 'atv@octane.com', '1234567890', 1, barista),
-    ('Andrew', 'westside@octane.com', '0987654321', 1, manager),
-    ('Chris', 'thebox@brash.com', '1234567890', 2, manager),
-    ('Hannah', 'hannah@brash.com', '1230987654', 2, barista)
+    ('Joe', 'atv@octane.com', '1234567890', 1, 'barista'),
+    ('Andrew', 'westside@octane.com', '0987654321', 1, 'manager'),
+    ('Chris', 'thebox@brash.com', '1234567890', 2, 'manager'),
+    ('Hannah', 'hannah@brash.com', '1230987654', 2, 'barista')
 ;
 
 INSERT into shift_available
