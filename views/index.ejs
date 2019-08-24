@@ -1,5 +1,47 @@
-extends layout
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link type="text/css" rel="stylesheet" href="/stylesheets/dashboard.css">
+  <script type='text/javascript' src='/javascripts/dashboard.js'></script>
+</head>
+<body>
+  
 
-block content
-  h1= title
-  p Welcome to #{title}
+<div class="grid-container">
+    <div class="menu-icon">
+     <i class="fas fa-bars header__menu"></i>
+   </div>
+    
+   <header class="header">
+     <div class="header__search">Company Name</div>
+     <div class="header__avatar">Hello, Username</div>
+
+     <div class="header__login">Logout</div>
+   </header>
+ 
+   <aside class="sidenav">
+     <div class="sidenav__close-icon">
+       <i class="fas fa-times sidenav__brand-close"></i>
+     </div>
+     <ul class="sidenav__list">
+       <li class="sidenav__list-item">Home</li>
+       <li class="sidenav__list-item">Shifts</li>
+       <li class="sidenav__list-item">Message</li>
+       <li class="sidenav__list-item">TimeOff</li>
+     </ul>
+   </aside>
+ 
+   <main class="main">
+     <div class="main-header">
+       <div class="main-header__heading">User Profile
+        <p>user info</p>
+        <p>user info</p>
+        <p>user info</p>
+        <p>user info</p>
+
+</body>
+</html>
