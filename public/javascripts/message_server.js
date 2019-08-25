@@ -1,14 +1,14 @@
-var express = require('express');
-var bodyParser = require('body-parser')
-var app = express();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+let express = require('express');
+let bodyParser = require('body-parser')
+let app = express();
+let http = require('http').Server(app);
+let io = require('socket.io')(http);
 
 app.use(express.static(__dirname));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}))
 
-var Message = mongoose.model('Message',{
+let Message = mongoose.model('Message',{
   name : String,
   message : String
 })
@@ -23,7 +23,7 @@ app.get('/messages', (req, res) => {
 
 
 app.get('/messages/:user', (req, res) => {
-  var user = req.params.user
+  let user = req.params.user
   Message.find({name: user},(err, messages)=> {
     res.send(messages);
   })
@@ -32,9 +32,9 @@ app.get('/messages/:user', (req, res) => {
 
 app.post('/messages', async (req, res) => {
   try{
-    var message = new Message(req.body);
+    let message = new Message(req.body);
 
-    var savedMessage = await message.save()
+    let savedMessage = await message.save()
       console.log('saved');
   }
   catch (error){
@@ -55,6 +55,6 @@ io.on('connection', () =>{
 
 
 
-var server = http.listen(3000, () => {
+let server = http.listen(3000, () => {
   console.log('server is running on port', server.address().port);
 });
