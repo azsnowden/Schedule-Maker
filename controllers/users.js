@@ -80,6 +80,13 @@ async function createOneVaca(userDataObj){
     return vacaRequest;
 }
 
-profile(2)
-recurringTO(2)
-oneTO(2)
+// profile(2)
+// recurringTO(2)
+// oneTO(2)
+
+module.exports = {
+                    profile,
+                    recurringTO,
+                    oneTO,
+                    createRecurrTO,
+                    createOneVaca}
