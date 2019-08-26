@@ -8,16 +8,15 @@ const server = http.createServer(app);
 
 const wss = new WebSocket.Server({
   server,          // piggybacking on the plain http server
-  path: '/chat'    // listen on only one route, allowing express to listen on its custom routes
+  path: '/message'    // listen on only one route, allowing express to listen on its custom routes
 });
 
     
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-app.engine('html', es6Renderer);
 app.set('views', 'views');
-app.set('view engine', 'html');
+app.set('view engine', 'ejs');
 
 
 const msgs = [
@@ -47,11 +46,11 @@ wss.on('connection', (socket) => {
 
 
 
-app.use('/chat', (req, res) => {
-  res.render('index', {locals:{
+app.use('/message', (req, res) => {
+  res.render('message', {locals:{
     "msgs": msgs,
     // "me" : req.session.user
   }});
 });
 
-server.listen(3000, ()=> {console.log("Server is running on 3002");});
+server.listen(3002, ()=> {console.log("Server is running on 3002");});
