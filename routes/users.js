@@ -47,7 +47,6 @@ router.post('/registerProcess', (req, res, next) => {
   insertUser();
 });
 
-
 router.post('/registerNewBusinessProcess', async (req, res, next) => {
   const {email} = req.session.user;
   const {address, business_name, business_email, displayname, phone_number} = req.body

@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 const auth = require('./auth');
+const user = require('../controllers/users')
+const db = require('../db')
 
 router.use('/', auth);
 
@@ -27,9 +29,18 @@ router.get('/register_business', (req, res, next) => {
   }
 })
 
-router.get('/employee-dashboard', (req, res, next) => {
-  res.render('employee-dashboard', {
-  });
+router.get('/employee-dashboard', async(req,res,next) =>{
+  const userId = '1';
+  // const userInfo = await user.profile(userId)
+  const business = 2;
+  const event = await db.any('select * from schedule where business_id=$1',[business])
+  const calendarEvents = event.map(data => {
+    return {
+      "start":data.start_time,
+      "end": data.end_time
+    }
+  })
+  res.render('employee-dashboard',{calendarEvents})
 })
 
 router.get('/admin-dashboard', (req, res, next) => {
@@ -51,6 +62,8 @@ router.get('/message', (req, res) => {
     // "me" : req.session.user
   });
 });
+
+
 
 // router.get('/admin/')
 

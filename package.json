@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "db:reset": "dropdb scheduleMaker; bash create-db.sh"
+    "db:reset": "dropdb schedulemaker; bash create-db.sh"
   },
   "dependencies": {
     "@fullcalendar/core": "^4.1.0",
