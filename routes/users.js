@@ -20,6 +20,17 @@ router.get('/profile', async function(req, res, next) {
   res.render('profile', {displayname, email, phone_number, business});
 });
 
+
+//ACKAKC WILL THIS WORK? 
+router.get('/admin', (req, res, next) => {
+  if (req.session.user.admin === true){
+    res.render('/admin/', {
+  });}
+  else{
+    res.redirect('/employee-dashboard')
+  }
+})
+
 router.get('/admin/employees', async function(req, res, next) {
   // console.log('/Users, req:', req.session.user)
   const userId = req.session.user.id;
