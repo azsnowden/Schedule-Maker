@@ -6,7 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <link type="text/css" rel="stylesheet" href="/stylesheets/dashboard.css">
-  <script type='text/javascript' src='/javascripts/dashboard.js'></script>
+  
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
 </head>
 <body>
   
@@ -42,6 +46,73 @@
         <p>user info</p>
         <p>user info</p>
         <p>user info</p>
+        </div>
+      </main>
 
-</body>
+          <script type='text/javascript' src='/javascripts/dashboard.js'></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.3.1/main.js'></script>
+        <link type="text/css" rel="stylesheet" href="/stylesheets/main.css">
+        <link type="text/css" rel="stylesheet" href="/stylesheets/dayGrid.css">
+        <link type="text/css" rel="stylesheet" href="/stylesheets/timeGrid.css">
+        <script type='text/javascript' src='/javascripts/dayGrid.js'></script>
+        <script type='text/javascript' src='/javascripts/timegrid.js'></script>
+        <script type='text/javascript' src='/javascripts/interaction.js'></script>
+        <div id="calendar"></div>
+        <script>
+          
+            document.addEventListener('DOMContentLoaded', function() {
+          let calendarEl = document.getElementById('calendar');
+          console.log(calendarEl)
+          let calendar = new FullCalendar.Calendar(calendarEl, {
+            plugins: [ 'interaction', 'dayGrid', 'timeGrid' ],
+            selectable: true,
+            defaultView: 'timeGridWeek',
+            header: {
+              left: 'prev,next today',
+              center: 'title',
+              right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+            footer: {
+              center: 'addEventButton'
+            },
+            timeZone: 'local',
+            
+            dateClick: function(info) {
+              alert('clicked ' + info.dateStr);
+            },
+            select: function(info) {
+              alert('selected ' + info.startStr + ' to ' + info.endStr);
+              console.log(info)
+              calendar.addEvent({
+                title:"Time Off",
+                start: info.startStr,
+                end: info.endStr
+              })
+                   },
+            customButtons: {
+              addEventButton: {
+                text: 'Add Time Off',
+                click: function() {
+                  let dateStr = prompt('Enter a date in YYYY-MM-DD format');
+                  let date = new Date(dateStr + 'T00:00:00'); // will be in local time
+        
+                  if (!isNaN(date.valueOf())) { // valid?
+                    calendar.addEvent({
+                      title: 'Time Off',
+                      start: date,
+                      allDay: true
+                    });
+                    alert('Great. Now, update your database...');
+                  } else {
+                    alert('Invalid date.');
+                  }
+                  }}},
+          });
+          calendar.render();
+        });
+
+      </script>
+      </div>
+        </body>
 </html>
