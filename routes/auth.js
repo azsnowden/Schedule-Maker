@@ -28,9 +28,9 @@ router.get('/callback', function (req, res, next) {
             delete req.session.returnTo;
             const checkUser = await Users.userExists(user)
             if (checkUser){
-                console.log(checkUser)
+                // console.log(checkUser)
                 req.session.user = checkUser
-                res.redirect(returnTo || '/users');
+                res.redirect(returnTo || '/users/profile');
                 }
             else{
                 req.session.user = user.emails[0].value
@@ -59,6 +59,7 @@ router.get('/logout', (req, res) => {
     logoutURL.search = searchString;
 
     res.redirect(logoutURL);
+    // res.redirect('/')
 });
 
 module.exports = router;

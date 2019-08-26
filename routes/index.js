@@ -10,8 +10,21 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/register', (req, res, next) => {
+  if (req.session.user){
   res.render('register', {
-  });
+  });}
+  else{
+    res.redirect('/login')
+  }
+})
+
+router.get('/register_business', (req, res, next) => {
+  if (req.session.user){
+    res.render('register_admin', {
+  });}
+  else{
+    res.redirect('/login')
+  }
 })
 
 router.get('/employee-dashboard', (req, res, next) => {

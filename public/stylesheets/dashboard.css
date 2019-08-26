@@ -1,9 +1,13 @@
 body {
-  margin: 0;
-  padding: 0;
-  color: #fff;
-  font-family: 'Open Sans', Helvetica, sans-serif;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    font-family: 'Open Sans', Helvetica, sans-serif;
+    box-sizing: border-box;
+  }
+.lesser_list {
+  padding: 10px;
+  list-style: none;
 }
 
 /* Assign grid instructions to our parent grid container, mobile-first (hide the sidenav) */
@@ -183,6 +187,7 @@ body {
 /* Non-mobile styles, 750px breakpoint */
 @media only screen and (min-width: 46.875em) {
   /* Show the sidenav */
+
   .grid-container {
     grid-template-columns: 240px 1fr;
     grid-template-areas:
