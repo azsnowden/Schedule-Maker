@@ -3,9 +3,18 @@ const db = require('../db');
 
 async function employeeList(userId){
     try {
-        const user = await db.one('select * from users WHERE id=$1'[userId]);
+        const user = await db.one('select * from users WHERE id=$1', [userId]);
+        // const business = await db.one('select business_name from businesses WHERE id=$1', [user.business_id]);
         const employeeList = await db.any('select * from users WHERE business_id=$1', [user.business_id]);
-        console.log(employeeList)
+        // employeeList.push(business)
+        // console.log(employeeList)
+        // for (i = 0; i < employeeList.length; i++){
+        //     const name = employeeList[i].displayname;
+        //     const phone_number = employeeList[i].phone_number;
+        //     const email = employeeList[i].email;
+        //     employeeObj[employeeList[i].displayname] = {phone_number, email}
+        // }
+        // console.log(employeeObj)
         return employeeList
         }
     catch(error){
@@ -75,12 +84,12 @@ async function createShift (shiftObj){
 
 
 
-obj = {day_of_week: "Monday",
-        start_time: '03:00',
-        end_time: '04:00',
-        shift_title: 'closer',
-        business: 1,
-        location_id: 2,
-        location_name: 'Octane Westside'}
+// obj = {day_of_week: "Monday",
+//         start_time: '03:00',
+//         end_time: '04:00',
+//         shift_title: 'closer',
+//         business: 1,
+//         location_id: 2,
+//         location_name: 'Octane Westside'}
 
-createShift(obj)
+module.exports = {employeeList,}
