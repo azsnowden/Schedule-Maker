@@ -68,4 +68,12 @@ router.post('/registerNewBusinessProcess', async (req, res, next) => {
   }))
 });
 
+router.get('/employee-dashboard', async(req,res,next) =>{
+  const userInfo = await user.profile(userId)
+  const business = userInfo.business.business_name
+  const event = db.any('select * from schedule where business_id=$1'[business])
+  console.log(event)
+  res.render('/employee-dashboard', {event})
+})
+
 module.exports = router;
