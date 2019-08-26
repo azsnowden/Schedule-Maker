@@ -4,10 +4,11 @@ const db = require('../db');
 //Display profile
 async function profile(userId){
     try {
-        const user = await db.one('select * from users WHERE id=$1'[userId]);
-        const userBusiness = await db.any('select * from businesses where user_business_id=$1', [user.business_id]);
-        user.business = userBusiness;
-        console.log(user)
+        const user = await db.one('select * from users WHERE id=$1',[userId]);
+        const userBusiness = await db.any('select * from businesses where id=$1', [user.business_id]);
+        user.business = userBusiness[0];
+        // console.log(userBusiness)
+        // console.log(user)
         return user
         }
     catch(error){

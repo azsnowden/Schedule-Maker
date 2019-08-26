@@ -5,6 +5,10 @@ body {
     font-family: 'Open Sans', Helvetica, sans-serif;
     box-sizing: border-box;
   }
+.lesser_list {
+  padding: 10px;
+  list-style: none;
+}
   
   /* Assign grid instructions to our parent grid container, mobile-first (hide the sidenav) */
   .grid-container {
