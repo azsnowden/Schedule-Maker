@@ -1,60 +1,57 @@
-let express = require('express');
-let bodyParser = require('body-parser')
-let app = express();
-let http = require('http').Server(app);
-let io = require('socket.io')(http);
-
-app.use(express.static(__dirname));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}))
-
-let Message = mongoose.model('Message',{
-  name : String,
-  message : String
-})
+const express = require('express');
+const app = express();
+const es6Renderer = require('express-es6-template-engine');
+const WebSocket = require('ws');
+const http = require('http');
+const server = http.createServer(app); 
 
 
-
-app.get('/messages', (req, res) => {
-  Message.find({},(err, messages)=> {
-    res.send(messages);
-  })
-})
-
-
-app.get('/messages/:user', (req, res) => {
-  let user = req.params.user
-  Message.find({name: user},(err, messages)=> {
-    res.send(messages);
-  })
-})
-
-
-app.post('/messages', async (req, res) => {
-  try{
-    let message = new Message(req.body);
-
-    let savedMessage = await message.save()
-      console.log('saved');
-  }
-  catch (error){
-    res.sendStatus(500);
-    return console.log('error',error);
-  }
-  finally{
-    console.log('Message Posted')
-  }
-
-})
-
-
-
-io.on('connection', () =>{
-  console.log('a user is connected')
-})
-
-
-
-let server = http.listen(3000, () => {
-  console.log('server is running on port', server.address().port);
+const wss = new WebSocket.Server({
+  server,          // piggybacking on the plain http server
+  path: '/chat'    // listen on only one route, allowing express to listen on its custom routes
 });
+
+    
+
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
+app.engine('html', es6Renderer);
+app.set('views', 'views');
+app.set('view engine', 'html');
+
+
+const msgs = [
+  {"to":"ben", "from":"armond", "timestamp": "11:31am", "message":"lol cats"},
+  {"to":"armond", "from":"ben", "timestamp": "11:32am", "message":"be well soon"},
+];
+
+wss.on('connection', (socket) => {
+  console.log('oh boy! a new connection!');
+  // socket.send(JSON.stringify(db));
+
+  socket.on('message', (data) => {
+      const parsed = JSON.parse(data)
+      console.log(parsed);
+      msgs.push(parsed);
+
+      console.log(msgs);
+      wss.clients.forEach((client) => {
+          if (client.readyState === WebSocket.OPEN) {
+              client.send(JSON.stringify(data));
+          }
+      });
+      // socket.send(data);
+  });
+});
+
+
+
+
+app.use('/chat', (req, res) => {
+  res.render('index', {locals:{
+    "msgs": msgs,
+    // "me" : req.session.user
+  }});
+});
+
+server.listen(3000, ()=> {console.log("Server is running on 3002");});

@@ -88,3 +88,39 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+
+
+
+// ================================websockets============================
+const WebSocket = require('ws');
+
+const wss = new WebSocket.Server({
+  server,          // piggybacking on the plain http server
+  path: '/message'    // listen on only one route, allowing express to listen on its custom routes
+});
+
+const msgs = [
+  {"to":"ben", "from":"armond", "timestamp": "11:31am", "message":"lol cats"},
+  {"to":"armond", "from":"ben", "timestamp": "11:32am", "message":"be well soon"},
+];
+
+wss.on('connection', (socket) => {
+  console.log('oh boy! a new connection!');
+  // socket.send(JSON.stringify(db));
+
+  socket.on('message', (data) => {
+      const parsed = JSON.parse(data)
+      console.log(parsed);
+      msgs.push(parsed);
+
+      console.log(msgs);
+      wss.clients.forEach((client) => {
+          if (client.readyState === WebSocket.OPEN) {
+              client.send(JSON.stringify(data));
+          }
+      });
+      // socket.send(data);
+  });
+});
+
