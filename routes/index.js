@@ -37,7 +37,7 @@ router.get('/register_business', (req, res, next) => {
 router.get('/employee-dashboard', async(req,res,next) =>{
   const userId = '1';
   // const userInfo = await user.profile(userId)
-  const business = 2;
+  const business = 1;
   const event = await db.any('select * from schedule where business_id=$1',[business])
   const calendarEvents = event.map(data => {
     return {
@@ -45,6 +45,7 @@ router.get('/employee-dashboard', async(req,res,next) =>{
       "end": data.end_time
     }
   })
+
   res.render('employee-dashboard',{calendarEvents})
 })
 

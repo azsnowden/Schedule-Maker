@@ -49,14 +49,14 @@
         <p>user info 1</p>
         <p>user info 2</p>
         <p>user info 3</p>
-        <%console.log(calendarEvents)%>
+        
       </div>
       <div id="calendar"></div>
     </div>
-      <script>
+    <script>
           document.addEventListener('DOMContentLoaded', function() {
         let calendarEl = document.getElementById('calendar');
-        console.log(calendarEl)
+
         let calendar = new FullCalendar.Calendar(calendarEl, {
           plugins: [ 'interaction', 'dayGrid', 'timeGrid' ],
           selectable: true,
@@ -72,7 +72,7 @@
           timeZone: 'local',
           editable: false,
 
-          // events:[<% calendarEvents %>],
+          events:<%- JSON.stringify(calendarEvents) %>,
           
           dateClick: function(info) {
             alert('clicked ' + info.dateStr);
