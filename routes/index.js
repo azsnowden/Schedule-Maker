@@ -9,6 +9,11 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+router.get('/about', function(req,res,next){
+  res.render('about',)
+}
+)
+
 router.get('/register', (req, res, next) => {
   if (req.session.user){
   res.render('register', {
