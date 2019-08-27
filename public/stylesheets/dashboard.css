@@ -9,6 +9,9 @@ body {
   padding: 10px;
   list-style: none;
 }
+.messengerp{
+  color: black;
+}
 
 /* Assign grid instructions to our parent grid container, mobile-first (hide the sidenav) */
 .grid-container {
