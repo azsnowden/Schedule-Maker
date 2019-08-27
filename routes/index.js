@@ -41,10 +41,10 @@ router.get('/register_business', (req, res, next) => {
 //   res.render('admin-calendar', {
 //   });
 // })
-// const msgs = [
-//   {"to":"ben", "from":"armond", "timestamp": "11:31am", "message":"lol cats"},
-//   {"to":"armond", "from":"ben", "timestamp": "11:32am", "message":"be well soon"},
-// ];
+const msgs = [
+  {"to":"ben", "from":"armond", "timestamp": "11:31am", "message":"lol cats"},
+  {"to":"armond", "from":"ben", "timestamp": "11:32am", "message":"be well soon"},
+];
 
 router.get('/message', (req, res) => {
   res.render('message', {

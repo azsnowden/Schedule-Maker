@@ -5,13 +5,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <link type="text/css" rel="stylesheet" href="/stylesheets/dashboard.css">
+  
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+  <script type='text/javascript' src='/javascripts/dashboard.js'></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.3.1/main.js'></script>
+  <link type="text/css" rel="stylesheet" href="/stylesheets/main.css">
+  <link type="text/css" rel="stylesheet" href="/stylesheets/dayGrid.css">
+  <link type="text/css" rel="stylesheet" href="/stylesheets/timeGrid.css">
+  <script type='text/javascript' src='/javascripts/dayGrid.js'></script>
+  <script type='text/javascript' src='/javascripts/timegrid.js'></script>
+  <script type='text/javascript' src='/javascripts/interaction.js'></script>
+
 </head>
 <body>
+  <div class="grid-container">
+    <div class="menu-icon">
+      <i class="fas fa-bars header__menu"></i>
+    </div>
+    <header class="header">
+      <div class="header__login">Logout</div>
+    </header>
+
+    <aside class="sidenav">
+      <div class="sidenav__close-icon">
+        <i class="fas fa-times sidenav__brand-close"></i>
+      </div>
+      <ul class="sidenav__list">
+          <li class="sidenav__list-item"><a href="/users/employee-dashboard">Home</a></li>
+          <li class="sidenav__list-item"><a href="/message">Message</a></li>
+          <li class="sidenav__list-item"><a href="/users/profile">Profile</a></li>
+      </ul>
+    </aside>
   
   <ul id="chat-box">
 
     
-    <%for(let i = 0; i<msgs.length; i++){%>
+    <%for(let i = 2; i<msgs.length; i++){%>
         <li>
           <p style="margin:5px"><%=msgs[i].message%></p>
         </li>
@@ -24,7 +58,7 @@
     <button id="chat-send" >Send</button>
   </div>
 <script>
-  const connection = new WebSocket("ws://192.168.0.163:3000/message")
+  const connection = new WebSocket("ws://10.150.40.99:3000/message")
   document.getElementById("chat-send").addEventListener("click", (e)=>{
     e.preventDefault();
     const message = document.getElementById("chat-text").value;
@@ -36,8 +70,8 @@
   connection.onmessage = (e) => {
     const {message} = JSON.parse(JSON.parse(e.data))
     const ul = document.getElementById('chat-box')
-    const li = document.createElement('li')
-    li.innerHTML = '<p style="margin:5px">'+message+'</p>'
+    const li = document.createElement('p')
+    li.innerHTML = '<p style="color:black; margin:5px>'+message+'</p>'
     ul.appendChild(li)
     console.log(message);
   };

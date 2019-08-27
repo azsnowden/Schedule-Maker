@@ -17,7 +17,7 @@ router.get('/profile', async function(req, res, next) {
   // console.log('UserId:', userId)
   // res.send(user.profile(userInfo))
   // console.log(userInfo)
-  res.render('profile', {displayname, email, phone_number, business});
+  res.render('profile', {userInfo, displayname, email, phone_number, business});
 });
 
 //ACKAKC WILL THIS WORK? 
@@ -36,7 +36,7 @@ router.get('/admin/employees', async function(req, res, next) {
   const employeeList = await admin.employeeList(userId);
   const userInfo = await user.profile(userId);
   const business = userInfo.business.business_name;
-  res.render('employee_directory', {employeeList, business});
+  res.render('employee_directory', {employeeList, business, userInfo});
 });
 
 router.post('/registerProcess', (req, res, next) => {
@@ -85,6 +85,7 @@ router.get('/employee-dashboard', async(req,res,next) =>{
   const userId = req.session.user.id;
   const userInfo = await user.profile(userId);
   const business = userInfo.business.business_id;
+  console.log(userInfo)
   const event = await db.any('select * from schedule where user_id=$1',[userId])
   const calendarEvents = event.map(data => {
     return {
@@ -93,24 +94,24 @@ router.get('/employee-dashboard', async(req,res,next) =>{
     }
   })
 
-  res.render('employee-dashboard',{calendarEvents})
+  res.render('employee-dashboard',{calendarEvents, userInfo})
 })
 
 /*get Admin-Dashboard. */
 router.get('/admin/dashboard', async (req, res, next) => {
   const userId = req.session.user.id;
   const userInfo = await user.profile(userId)
+  console.log(userInfo)
   const business = userInfo.business_id;
   const event = await db.any('select * from schedule where business_id=$1',[business])
-  console.log('business', business)
-  console.log('event', event)
   const calendarEvents = event.map(data => {
     return {
       "start":data.start_time,
-      "end": data.end_time
+      "end": data.end_time,
+      userInfo
     }
   })
-  res.render('admin-dashboard', {calendarEvents
+  res.render('admin-dashboard', {calendarEvents, userInfo
   });
 })
 
@@ -122,7 +123,7 @@ router.get('/admin/schedule', async (req,res,next)=>{
   const employeeList = await admin.employeeList(userId);
   const userInfo = await user.profile(userId);
   const business = userInfo.business.business_name;
-  res.render('admin-schedule', {employeeList, business})
+  res.render('admin-schedule', {employeeList, business, userInfo})
 })
 
 
