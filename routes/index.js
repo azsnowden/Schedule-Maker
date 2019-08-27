@@ -37,29 +37,6 @@ router.get('/register_business', (req, res, next) => {
   }
 })
 
-/* GET Employee-Dashboard page. */
-router.get('/employee-dashboard', async(req,res,next) =>{
-  const userId = '1';
-  // const userInfo = await user.profile(userId)
-  const business = 1;
-  const event = await db.any('select * from schedule where business_id=$1',[business])
-  const calendarEvents = event.map(data => {
-    return {
-      "start":data.start_time,
-      "end": data.end_time
-    }
-  })
-
-  res.render('employee-dashboard',{calendarEvents})
-})
-
-/*get Admin-Dashboard. */
-router.get('/admin-dashboard', (req, res, next) => {
-  res.render('admin-dashboard', {
-  });
-})
-
-
 router.get('/calendar', (req, res, next) => {
   res.render('admin-calendar', {
   });
