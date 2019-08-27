@@ -20,16 +20,15 @@ router.get('/profile', async function(req, res, next) {
   res.render('profile', {displayname, email, phone_number, business});
 });
 
-
 //ACKAKC WILL THIS WORK? 
-router.get('/admin', (req, res, next) => {
-  if (req.session.user.admin === true){
-    res.render('/admin/', {
-  });}
-  else{
-    res.redirect('/employee-dashboard')
-  }
-})
+// router.get('/admin', (req, res, next) => {
+//   if (req.session.user.admin === true){
+//     res.render('/admin/', {
+//   });}
+//   else{
+//     res.redirect('/employee-dashboard')
+//   }
+// })
 
 router.get('/admin/employees', async function(req, res, next) {
   // console.log('/Users, req:', req.session.user)
@@ -79,12 +78,73 @@ router.post('/registerNewBusinessProcess', async (req, res, next) => {
   }))
 });
 
+
+//Employee's Dashboard
+/* GET Employee-Dashboard page. */
 router.get('/employee-dashboard', async(req,res,next) =>{
-  const userInfo = await user.profile(userId)
-  const business = userInfo.business.business_name
-  const event = db.any('select * from schedule where business_id=$1'[business])
-  console.log(event)
-  res.render('/employee-dashboard', {event})
+  const userId = req.session.user.id;
+  const userInfo = await user.profile(userId);
+  const business = userInfo.business.business_id;
+  const event = await db.any('select * from schedule where user_id=$1',[userId])
+  const calendarEvents = event.map(data => {
+    return {
+      "start":data.start_time,
+      "end": data.end_time
+    }
+  })
+
+  res.render('employee-dashboard',{calendarEvents})
 })
+
+/*get Admin-Dashboard. */
+router.get('/admin/dashboard', async (req, res, next) => {
+  const userId = req.session.user.id;
+  const userInfo = await user.profile(userId)
+  const business = userInfo.business_id;
+  const event = await db.any('select * from schedule where business_id=$1',[business])
+  console.log('business', business)
+  console.log('event', event)
+  const calendarEvents = event.map(data => {
+    return {
+      "start":data.start_time,
+      "end": data.end_time
+    }
+  })
+  res.render('admin-dashboard', {calendarEvents
+  });
+})
+
+
+//Schedule Form
+router.get('/admin/schedule', async (req,res,next)=>{
+  const userId = req.session.user.id;
+  // const userId = 5;
+  const employeeList = await admin.employeeList(userId);
+  const userInfo = await user.profile(userId);
+  const business = userInfo.business.business_name;
+  res.render('admin-schedule', {employeeList, business})
+})
+
+
+// //Schedule Post
+router.post('/schedulePost', async (req, res, next) => {
+  // const parsed = JSON.parse(req.body);
+  // console.log(req.body.displayname)
+  // console.log(req.body['start-time'])
+  // console.log(req.body['end-time'])
+  const {displayname, startdate, starttime, enddate, endtime} = req.body
+  const new_start = `${startdate} ${starttime}`
+  const new_end = `${enddate} ${endtime}`
+
+  const userInfo = await db.one('select * from users where displayname=$1',[displayname])
+  const businessId = userInfo.business_id;
+  const userId = userInfo.id;
+
+  const insertScheduleQuery = await `INSERT INTO schedule (user_id, business_id, start_time, end_time)
+      VALUES ($1,$2,$3, $4) 
+      returning id`
+    db.one(insertScheduleQuery, [userId, businessId, new_start, new_end]).then((resp)=> res.redirect('/users/admin/schedule'))
+    .catch(err => res.json({message: err}))
+  });
 
 module.exports = router;

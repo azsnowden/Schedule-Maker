@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/dashboard.css">
+    <script type='text/javascript' src='/javascripts/dashboard.js'></script>
+</head>
+<body>
+
+<div class="grid-container">
+    <div class="menu-icon">
+        <i class="fas fa-bars header__menu"></i>
+    </div>
+    
+    <header class="header">
+        <div class="header__search"></div>
+        <div class="header__avatar">Hello, </div>
+
+        <div class="header__login">Logout</div>
+    </header>
+
+    <aside class="sidenav">
+        <div class="sidenav__close-icon">
+        <i class="fas fa-times sidenav__brand-close"></i>
+        </div>
+        <ul class="sidenav__list">
+        <li class="sidenav__list-item">Home</li>
+        <li class="sidenav__list-item">Shifts</li>
+        <li class="sidenav__list-item">Message</li>
+        <li class="sidenav__list-item">TimeOff</li>
+        </ul>
+    </aside>
+
+    <main class="main">
+        <div class="main-header">
+        <div class="main-header__heading">User Profile
+                <form action="/users/schedulePost" method="post">
+                    <section>
+                            <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-12 col-md-8 col-lg-8 col-xl-6">
+                                <div class="row">
+                                    <div class="col text-center">
+                                    <h1>Create a Shift</h1>
+                                    <p class="text-h3">Use the Menu Below to Create New Shifts</p>
+                                    </div>
+                                </div>
+                                <div>
+                                        <% if (employeeList.length) {
+                                            %><select name="displayname">
+                                                <% employeeList.forEach((x) => {
+                                                    %>
+                                                    <option value=<%= x.displayname%>><%= x.displayname%></option>
+                                                    <%
+                                                }) %>
+                                            </select><%
+                                            } %>
+                                        <p>
+                                        </p>
+                                </div>
+                                <div class="row align-items-center mt-4">
+                                    <div class="col">
+                                    <input type="date" name=startdate class="form-control" placeholder="Shift Start: YYYY-MM-DD HH:MM">
+                                    <input type="time" name=starttime class="form-control" placeholder="Shift Time: HH:MM">
+                                    </div>
+                                </div>
+                                <div class="row align-items-center mt-4">
+                                    <div class="col">
+                                    <input type="date" name=enddate class="form-control" placeholder="Shift End: YYYY-MM-DD HH:MM">
+                                    <input type="time" name=endtime class="form-control" placeholder="Shift Time: HH:MM">
+                                    </div>
+                                </div>
+                                <div class="row justify-content-start mt-4">
+                                    <input type="submit" class="btn btn-primary mt-4">
+                                </div>
+                                </div>
+                                </div>
+                            </div>
+                    </section>
+                </form>
+        </div>
+        </div>
+    </main>
+</body>
+</html>
