@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Messenger</title>
   <link type="text/css" rel="stylesheet" href="/stylesheets/dashboard.css">
   
   <script
@@ -28,7 +28,7 @@
       <i class="fas fa-bars header__menu"></i>
     </div>
     <header class="header">
-      <div class="header__login">Logout</div>
+      <div class="header__login"><a href="/">Logout</a</div>
     </header>
 
     <aside class="sidenav">
@@ -71,7 +71,7 @@
     const {message} = JSON.parse(JSON.parse(e.data))
     const ul = document.getElementById('chat-box')
     const li = document.createElement('p')
-    li.innerHTML = '<p style="color:black; margin:5px>'+message+'</p>'
+    li.innerHTML = '<p class="messengerp" style="margin:5px">'+message+'</p>'
     ul.appendChild(li)
     console.log(message);
   };
