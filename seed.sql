@@ -38,13 +38,13 @@ VALUES
     (1, 1, 1, 1)
 ;
 
-INSERT into recurring_TO
-    (day_of_week, start_time, end_time, user_id)
-VALUES
-    ('Monday', '07:00', '12:00', 1),
-    ('Tuesday', '07:00', '12:00', 2),
-    ('Sunday', '07:00', '04:00', 2)
-;
+-- INSERT into recurring_TO
+--     (day_of_week, start_time, end_time, user_id)
+-- VALUES
+--     ('Monday', '07:00', '12:00', 1),
+--     ('Tuesday', '07:00', '12:00', 2),
+--     ('Sunday', '07:00', '04:00', 2)
+-- ;
 
 INSERT into one_vaca
     (start_date, end_date, start_time, end_time, user_id)
@@ -67,3 +67,12 @@ VALUES
     (4, 'personal message number 2 sent by Hannah'),
     (4, 'Another personal message sent by Hannah')
 ;
+
+INSERT INTO schedule(
+    user_id,
+    business_id,
+    start_time,
+    end_time)
+    VALUES
+    (1, 1, '2019-08-25 09:00:00', '2019-08-25 13:00:00'),
+    (1, 1, '2019-08-27 09:00:00', '2019-08-27 13:00:00')

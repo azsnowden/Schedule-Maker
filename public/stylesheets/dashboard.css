@@ -134,6 +134,8 @@ body {
 
 .calendar{
   top:100px;
+  background-color: white;
+  z-index: 1;
 }
 
 .overviewcard {
@@ -183,6 +185,14 @@ body {
   padding: 0 16px;
   background-color: #648ca6;
 }
+.user-dashboard{
+  background-color: #678ea9;
+}
+
+.user-info{
+  color: magenta;
+  background-color:#394263;
+}
 
 /* Non-mobile styles, 750px breakpoint */
 @media only screen and (min-width: 46.875em) {
@@ -206,7 +216,7 @@ body {
   }
 
   .sidenav__close-icon {
-    visibility: hidden;
+    visibility: visible;
   }
 }
 

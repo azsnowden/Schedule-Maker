@@ -46,15 +46,22 @@ create table new_set_schedule(
     shift_id integer references shift_available(id)
 );
 
-
-create table recurring_TO(
-    id serial primary key,
-    day_of_week DOW not null,
-    start_time time,
-    end_time time,
-    approved boolean DEFAULT false,
-    user_id integer references users(id)
+create table schedule(
+    id serial primary key, 
+    user_id integer references users(id),
+    business_id integer references businesses(id),
+    start_time timestamp,
+    end_time timestamp
 );
+
+-- create table recurring_TO(
+--     id serial primary key,
+--     day_of_week DOW not null,
+--     start_time time,
+--     end_time time,
+--     approved boolean DEFAULT false,
+--     user_id integer references users(id)
+-- );
 
 create table one_vaca(
     id serial primary key,
