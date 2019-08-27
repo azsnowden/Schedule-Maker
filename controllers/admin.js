@@ -70,10 +70,10 @@ async function shifts(locationId){
 }
 
 async function createShift (shiftObj){
-    const {day_of_week, start_time, end_time, shift_title, business, location_id, location_name} = shiftObj;
+    const {start_time, end_time, business, location_id} = shiftObj;
     const shift_id = await db.one(`
-        INSERT INTO shift_available 
-        (day_of_week, start_time, end_time, shift_title, business, location_id, location_name) 
+        INSERT INTO schedule 
+        (day_of_week, start_time, end_time, business) 
         values ($1, $2, $3, $4, $5, $6, $7)
         
         returning id`
