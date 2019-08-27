@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>List of Employees</title>
+  <title>List of Employees for <%= business %></title>
   <link type="text/css" rel="stylesheet" href="/stylesheets/dashboard.css">
   <script type='text/javascript' src='/javascripts/dashboard.js'></script>
 </head>
@@ -18,7 +18,7 @@
     
    <header class="header">
      <div class="header__search"><%= business %></div>
-     <div class="header__avatar">Hello, <%= business %></div>
+     <div class="header__avatar">Hello, <%= userInfo.displayname %></div>
 
      <div class="header__login">Logout</div>
    </header>
@@ -28,12 +28,17 @@
        <i class="fas fa-times sidenav__brand-close"></i>
      </div>
      <ul class="sidenav__list">
-        <li class="sidenav__list-item"><a href="/users/admin/dashboard">Home</a></li>
-        <li class="sidenav__list-item"><a href="/users/admin/schedule">Shift Scheduler</a></li>
-        <li class="sidenav__list-item"><a href="/message">Message</a></li>
-        <li class="sidenav__list-item"><a href="/users/profile">Profile</a></li>
-        <li class="sidenav__list-item"><a href="/users/admin/employees">Employees List</a></li>
-     </ul>
+        <% if (userInfo.admin_user === true) { %>
+          <li class="sidenav__list-item"><a href="/users/admin/dashboard">Full Schedule</a></li>
+          <li class="sidenav__list-item"><a href="/users/admin/schedule">Shift Scheduler</a></li>
+          <li class="sidenav__list-item"><a href="/message">Message</a></li>
+          <li class="sidenav__list-item"><a href="/users/profile">Profile</a></li>
+          <li class="sidenav__list-item"><a href="/users/admin/employees">Employees List</a></li> 
+        <% } %>
+          <li class="sidenav__list-item"><a href="/users/employee-dashboard">Home</a></li>
+          <li class="sidenav__list-item"><a href="/message">Message</a></li>
+          <li class="sidenav__list-item"><a href="/users/profile">Profile</a></li>
+      </ul>
    </aside>
  
    <main class="main">

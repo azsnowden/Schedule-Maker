@@ -28,8 +28,8 @@
       <i class="fas fa-bars header__menu"></i>
     </div>
     <header class="header">
-      <div class="header__search">Company Name</div>
-      <div class="header__avatar">Hello, Username</div>
+      <div class="header__search"><%= userInfo.business.business_name %></div>
+      <div class="header__avatar">Hello, <%= userInfo.displayname %></div>
       <div class="header__login">Logout</div>
     </header>
 
@@ -38,20 +38,20 @@
         <i class="fas fa-times sidenav__brand-close"></i>
       </div>
       <ul class="sidenav__list">
-        <li class="sidenav__list-item"><a href="/users/admin/dashboard">Home</a></li>
-        <li class="sidenav__list-item"><a href="/users/admin/schedule">Shift Scheduler</a></li>
-        <li class="sidenav__list-item"><a href="/message">Message</a></li>
-        <li class="sidenav__list-item"><a href="/users/profile">Profile</a></li>
-        <li class="sidenav__list-item"><a href="/admin/employees">Employees List</a></li>
-      </ul>
+          <% if (userInfo.admin_user === true) { %>
+            <li class="sidenav__list-item"><a href="/users/admin/dashboard">Full Schedule</a></li>
+            <li class="sidenav__list-item"><a href="/users/admin/schedule">Shift Scheduler</a></li>
+            <li class="sidenav__list-item"><a href="/message">Message</a></li>
+            <li class="sidenav__list-item"><a href="/users/profile">Profile</a></li>
+            <li class="sidenav__list-item"><a href="/users/admin/employees">Employees List</a></li> 
+          <% } %>
+            <li class="sidenav__list-item"><a href="/users/employee-dashboard">Home</a></li>
+            <li class="sidenav__list-item"><a href="/message">Message</a></li>
+            <li class="sidenav__list-item"><a href="/users/profile">Profile</a></li>
+        </ul>
     </aside>
     <div class="user-dashboard">
       <div class="user-info">
-        <h1>User Profile</h1>
-        <p>user info 1</p>
-        <p>user info 2</p>
-        <p>user info 3</p>
-        
       </div>
       <div id="calendar"></div>
     </div>
