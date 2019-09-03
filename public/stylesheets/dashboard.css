@@ -51,6 +51,10 @@ body {
   margin-left: 42px;
 }
 
+.messengerp{
+  color:black;
+}
+
 .sidenav {
   grid-area: sidenav;
   display: flex;
