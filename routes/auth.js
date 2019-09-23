@@ -19,6 +19,11 @@ router.get('/login', passport.authenticate('auth0', {
 
 // Perform the final stage of authentication and redirect to /register or '/user'
 router.get('/callback', function (req, res, next) {
+    
+    console.log('*********')
+    console.log('*********')
+    console.log('*********')
+    console.log('auth0 working')
     passport.authenticate('auth0', function (err, user, info) {
         if (err) { return next(err); }
         if (!user) { return res.redirect('/login'); }
@@ -28,7 +33,7 @@ router.get('/callback', function (req, res, next) {
             delete req.session.returnTo;
             const checkUser = await Users.userExists(user)
             if (checkUser){
-                // console.log(checkUser)
+                console.log(checkUser)
                 req.session.user = checkUser
                 res.redirect(returnTo || '/users/profile');
                 }

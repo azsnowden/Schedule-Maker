@@ -29,9 +29,9 @@ app.use(session(sess))
 
 const strategy = new auth0Strategy(
   {
-    domain: process.env.AUTH0_DOMAIN,
-    clientID: process.env.AUTH0_CLIENT_ID,
-    clientSecret: process.env.AUTH0_CLIENT_SECRET,
+    domain: 'dev-z7ts65ny.auth0.com',
+    clientID: '0wxuKCQtL30EIzZjP1UTOBpY8ctEUdiZ',
+    clientSecret: 'qdqX1UsQO_kbMPFWXXUoOg4TabXS1mRum958zSF6RDdvpfy3vv6IFlNm99-xox6a',
     callbackURL:
       process.env.AUTH0_CALLBACK_URL || 'http://localhost:3000/callback'
   },

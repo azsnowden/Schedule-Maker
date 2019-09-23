@@ -7,7 +7,7 @@ const db = require('../db')
 
 /* GET users listing. */
 router.get('/profile', async function(req, res, next) {
-  // console.log('/Users, req:', req.session.user)
+  console.log('/Users, req:', req.session.user)
   const userId = req.session.user.id
   const userInfo = await user.profile(userId)
   // console.log(userInfo.business)
@@ -83,6 +83,7 @@ router.post('/registerNewBusinessProcess', async (req, res, next) => {
 /* GET Employee-Dashboard page. */
 router.get('/employee-dashboard', async(req,res,next) =>{
   const userId = req.session.user.id;
+  console.log(req.session.user.id)
   const userInfo = await user.profile(userId);
   const business = userInfo.business.business_id;
   console.log(userInfo)

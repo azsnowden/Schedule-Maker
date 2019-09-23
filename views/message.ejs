@@ -28,7 +28,8 @@
       <i class="fas fa-bars header__menu"></i>
     </div>
     <header class="header">
-      <div class="header__login"><a href="/">Logout</a</div>
+      <a href=""></a>
+      <a href="/">Logout</a>
     </header>
 
     <aside class="sidenav">
@@ -58,7 +59,7 @@
     <button id="chat-send" >Send</button>
   </div>
 <script>
-  const connection = new WebSocket("ws://10.150.40.99:3000/message")
+  const connection = new WebSocket("ws://localhost:3000/message")
   document.getElementById("chat-send").addEventListener("click", (e)=>{
     e.preventDefault();
     const message = document.getElementById("chat-text").value;

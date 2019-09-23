@@ -19,7 +19,8 @@ VALUES
     ('Joe', 'atv@octane.com', '1234567890', 1, 'barista'),
     ('Andrew', 'westside@octane.com', '0987654321', 1, 'manager'),
     ('Chris', 'thebox@brash.com', '1234567890', 2, 'manager'),
-    ('Hannah', 'hannah@brash.com', '1230987654', 2, 'barista')
+    ('Hannah', 'hannah@brash.com', '1230987654', 2, 'barista'),
+    ('Armond', 'armond.z.snowden@gmail.com','2134343444',1,'manager')
 ;
 
 INSERT into shift_available
